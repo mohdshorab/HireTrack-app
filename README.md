@@ -1,97 +1,102 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# HireTrack 🚀
 
-# Getting Started
+> [!IMPORTANT]
+> **Status: Work in Progress** 🚧
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+HireTrack is a high-performance, production-grade React Native application designed to help job seekers track their applications, interview rounds, and offers in one centralized place.
 
-## Step 1: Start Metro
+HireTrack offers a blazing-fast user experience with a fully responsive UI that scales across all mobile devices.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+---
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## ✨ Features
 
-```sh
-# Using npm
-npm start
+- **Dashboard**: Get a quick overview of your job search status (Applied, Active, Rejected).
+- **Application Tracking**: Detailed management of job roles, companies, locations, and salaries.
+- **Round Management**: Track interview rounds and follow-up dates.
+- **Responsive Architecture**: Custom scaling logic ensuring pixel-perfect layouts on every device size.
+- **Offline First**: Instant data access and persistence using high-performance MMKV storage.
+- **Premium UI**: Sleek design with modern typography and responsive components.
 
-# OR using Yarn
-yarn start
+---
+
+## 🛠️ Tech Stack
+
+- **Core**: [React Native 0.85.3](https://reactnative.dev/)
+- **Storage**: [MMKV](https://github.com/mrousavy/react-native-mmkv)
+- **Native Bridges**: [Nitro Modules](https://github.com/mrousavy/react-native-nitro-modules)
+- **Navigation**: [React Navigation 7](https://reactnavigation.org/)
+- **Icons**: [@react-native-vector-icons/ionicons](https://github.com/react-native-vector-icons/react-native-vector-icons)
+- **Splash Screen**: [react-native-bootsplash](https://github.com/zoontek/react-native-bootsplash)
+
+---
+
+## 🏗️ Architecture
+
+### Responsive Scaling Utility
+Located in `src/utils/responsive.ts`, this utility provides static scaling functions based on a 390x844 design baseline:
+- `hs` (Horizontal Scale): For widths and horizontal spacing.
+- `vs` (Vertical Scale): For heights and vertical spacing.
+- `ms` (Moderate Scale): For font sizes and border radii.
+
+### Style Separation
+Styles are separated into `.styles.ts` files and consumed as static objects, keeping components lean and performant.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+Before proceeding, ensure you have followed the [official React Native environment setup](https://reactnative.dev/docs/environment-setup) for your target platform (Android/iOS).
+
+### Installation
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/your-username/HireTrack.git
+   ```
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Install CocoaPods** (iOS Only):
+   ```bash
+   cd ios && pod install && cd ..
+   ```
+
+### Running the Application
+
+1. **Start Metro Bundler**:
+   ```bash
+   npm start
+   ```
+
+2. **Run on Android**:
+   ```bash
+   npm run android
+   ```
+
+3. **Run on iOS**:
+   ```bash
+   npm run ios
+   ```
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── components/         # Common UI components
+├── features/           # Feature-specific screens and logic
+│   ├── dashboard/      # Home dashboard & statistics
+│   └── applications/   # Application forms & lists
+├── navigation/         # Routing and stack definitions
+├── services/           # Data persistence and services
+├── themes/             # Color palettes and global spacing
+├── types/              # TypeScript interfaces
+└── utils/              # Global helper functions (Responsive scaling)
 ```
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Built with ❤️ by [Mohod Shorab]
