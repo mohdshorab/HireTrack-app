@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { StatusBar, Text, useColorScheme } from 'react-native';
+import { useColorScheme } from 'react-native';
 import {
   SafeAreaProvider,
+  initialWindowMetrics,
 } from 'react-native-safe-area-context';
 import AppNavigator from './src/navigation/AppNavigator';
 import BootSplash from "react-native-bootsplash";
@@ -9,13 +10,13 @@ import BootSplash from "react-native-bootsplash";
 const App: React.FC = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
-useEffect(() => {
-  BootSplash.hide({ fade: true });
-}, []);
+  useEffect(() => {
+    BootSplash.hide({ fade: true });
+  }, []);
 
   return (
-    <SafeAreaProvider>
-      <AppNavigator/>
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      <AppNavigator />
     </SafeAreaProvider>
   );
 };

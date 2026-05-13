@@ -1,7 +1,7 @@
 import { Dimensions, PixelRatio } from 'react-native';
 
 /**
- * PRODUCTION-GRADE RESPONSIVENESS UTILITY
+ * RESPONSIVENESS UTILITY
  * 
  * Why do we need this?
  * Standard React Native 'dp' units are not the same across all devices. 

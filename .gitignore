@@ -79,3 +79,5 @@ yarn-error.log
 
 # Ignore TypeScript cache files
 *.tsbuildinfo
+# Documentation
+docs/
