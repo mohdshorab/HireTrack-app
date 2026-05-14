@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { Colors, Spacing } from '../../../themes';
-import { hs, vs, ms } from '../../../utils/responsive';
+import { Colors, Spacing, Radius } from '../../../../themes';
+import { hs, vs, ms } from '../../../../utils/responsive';
 
 export const styles = StyleSheet.create({
   parent: {
@@ -24,13 +24,6 @@ export const styles = StyleSheet.create({
   },
   applicationsContainer: {
     gap: vs(Spacing.cardGap),
-  },
-  seeAllText: {
-    color: Colors.textSecondary,
-    fontWeight: '500',
-    fontSize: ms(16),
-    alignSelf: 'flex-end',
-    marginVertical: vs(16),
   },
   fab: {
     position: 'absolute',

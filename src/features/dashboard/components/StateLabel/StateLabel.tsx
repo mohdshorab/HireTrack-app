@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Colors } from '../../../themes';
+import { Colors } from '../../../../themes';
 import { styles } from './StateLabel.styles';
 
 type Item = {

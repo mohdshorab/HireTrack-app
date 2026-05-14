@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { Colors, Spacing, Radius } from '../../../themes';
-import { hs, vs, ms } from '../../../utils/responsive';
+import { Colors, Spacing, Radius } from '../../../../themes';
+import { hs, vs, ms } from '../../../../utils/responsive';
 
 export const styles = StyleSheet.create({
   container: {

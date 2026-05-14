@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { Colors, Spacing, Radius } from '../../../themes';
-import { hs, vs, ms } from '../../../utils/responsive';
+import { Colors, Spacing, Radius } from '../../../../themes';
+import { hs, vs, ms } from '../../../../utils/responsive';
 
 export const styles = StyleSheet.create({
   parent: {
@@ -9,9 +9,12 @@ export const styles = StyleSheet.create({
     paddingHorizontal: hs(Spacing.screenPadH),
   },
   scrollContent: {
-    flex: 1,
+    flexGrow: 1,
     paddingTop: vs(Spacing.md),
     paddingBottom: vs(Spacing.xxl * 2),
+  },
+  keyboardAvoidingView: {
+    flex: 1,
   },
   buttonContainer: {
     gap: vs(Spacing.md),
@@ -53,9 +56,5 @@ export const styles = StyleSheet.create({
     color: Colors.textPrimary,
     fontSize: ms(16),
     fontWeight: '500',
-  },
-  dropdownIcon: {
-    color: Colors.textPrimary,
-    fontSize: ms(12),
   },
 });

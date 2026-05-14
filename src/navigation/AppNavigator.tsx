@@ -2,8 +2,8 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from '../features/auth/screens/LoginScreen';
-import DashboardScreen from '../features/dashboard/screens/DashboardScreen';
-import AddApplicationScreen from '../features/applications/screens/AddApplicationScreen';
+import DashboardScreen from '../features/dashboard/screens/DashboardScreen/DashboardScreen';
+import AddApplicationScreen from '../features/applications/screens/AddApplicationScreen/AddApplicationScreen';
 import RootStackParamList from './RootStackParamList';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

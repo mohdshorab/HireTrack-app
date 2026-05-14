@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Colors } from '../../../themes';
-import { ApplicationItem } from '../../../types/application';
+import { Colors } from '../../../../themes';
+import { ApplicationItem } from '../../../../types/application';
 import { styles } from './ApplicationCard.styles';
 
 type ApplicationCardProps = {
@@ -19,8 +19,8 @@ const getStatusStyle = (status: string) => {
 };
 
 const ApplicationCard: React.FC<ApplicationCardProps> = ({ item }) => {
-  const currentRoundName = item.rounds && item.rounds.length > 0 
-    ? item.rounds[item.rounds.length - 1].name 
+  const currentRoundName = item.rounds && item.rounds.length > 0
+    ? item.rounds[item.rounds.length - 1].name
     : 'Applied';
 
   return (

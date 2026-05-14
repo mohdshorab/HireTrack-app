@@ -1,16 +1,14 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import RootStackParamList from '../../../navigation/RootStackParamList';
+import RootStackParamList from '../../../../navigation/RootStackParamList';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Header from '../../../components/header/Header';
-import StateLabel from '../components/StateLabel';
-import StatusBadges from '../../../components/statusBadges/StatusBadges';
-import ApplicationCard from '../components/ApplicationCard';
-import IonicIcon from '../../../components/ionicIcon/IonicIcon';
-import { getApplications } from '../../../services/storage';
-import { ApplicationItem } from '../../../types/application';
+import { Header, StatusBadges, IonicIcon } from '../../../../components';
+import StateLabel from '../../components/StateLabel/StateLabel';
+import ApplicationCard from '../../components/ApplicationCard/ApplicationCard';
+import { getApplications } from '../../../../services/storage';
+import { ApplicationItem } from '../../../../types/application';
 import { styles } from './DashboardScreen.styles';
 
 type props = NativeStackScreenProps<RootStackParamList, 'dashboard'>;
@@ -44,20 +42,21 @@ const DashboardScreen: React.FC<props> = ({ navigation }) => {
         <StateLabel items={statusData} />
       </View>
       <Text style={styles.sectionTitle}>Recent Applications</Text>
-      <View style={styles.applicationsContainer}>
-        {applications.slice(0, 2).map(item => (
+      <ScrollView style={styles.applicationsContainer}>
+        {applications.map(item => (
           <ApplicationCard key={item.id} item={item} />
         ))}
         {applications.length === 0 && <Text style={styles.emptyText}>No applications yet.</Text>}
-      </View>
-      {applications.length !== 0 && <Text style={styles.seeAllText}>See All</Text>}
+      </ScrollView>
       <StatusBadges />
-      <IonicIcon
-        iconName="add-outline"
-        size={28}
-        onPress={() => navigation.navigate('addApplication')}
-        style={styles.fab}
-      />
+      <View>
+        <IonicIcon
+          iconName="add-outline"
+          size={28}
+          onPress={() => navigation.navigate('addApplication')}
+          style={styles.fab}
+        />
+      </View>
     </SafeAreaView>
   );
 };
