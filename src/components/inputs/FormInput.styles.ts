@@ -21,9 +21,13 @@ export const styles = StyleSheet.create({
     color: Colors.textSecondary,
     fontSize: ms(10),
     fontWeight: '600',
-    textTransform: 'uppercase',
     letterSpacing: 0.5,
     marginBottom: vs(2),
+  },
+  labelRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   labelError: {
     color: Colors.danger,

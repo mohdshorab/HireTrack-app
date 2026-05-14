@@ -10,11 +10,13 @@ export interface ApplicationItem {
   companyName: string;
   role: string;
   location: string;
-  salary: string;
-  jdLink?: string;
+  salary: string | null;
+  jdLink?: string | null;
   status: string;
-  appliedOn: string;
-  followUpDate?: string;
-  notes?: string;
+  appliedOn: string | null;
+  followUpDate?: string | null;
+  notes?: string | null;
   rounds: InterviewRound[];
+  createdAt: number;
+  updatedAt: number;
 }
