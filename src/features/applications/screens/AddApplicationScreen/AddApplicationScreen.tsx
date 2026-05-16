@@ -10,8 +10,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import RootStackParamList from '../../../../navigation/RootStackParamList';
-import { FormInput, Header, AppCalendarModal, IonicIcon, Accordion } from '../../../../components';
-import { saveApplication } from '../../../../services/storage';
+import { FormInput, Header, CalendarModal, IonicIcon, Accordion } from '../../../../components';
 import { ApplicationItem } from '../../../../types/application';
 import { styles } from './AddApplicationScreen.styles';
 import StatusOptionModal from '../../components/StatusOptionModal';
@@ -19,6 +18,8 @@ import { ms } from '../../../../utils/responsive';
 import { getCurrentDate } from '../../../../utils/dateHelpers';
 import InfoModal from '../../components/infoModal/InfoModal';
 import { nanoid } from '@reduxjs/toolkit';
+import { useAppDispatch } from '../../../../store';
+import { addApplication } from '../../slices/applicationSlice';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'addApplication'>;
 const MODALS = {
@@ -43,6 +44,8 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false);
   const [showAccordion, setShowAccordion] = useState<boolean>(false);
+
+  const dispatch = useAppDispatch();
 
   const handleSave = () => {
     const newErrors: Record<string, string> = {};
@@ -75,7 +78,7 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
       updatedAt: Date.now(),
     };
 
-    saveApplication(newApp);
+    dispatch(addApplication(newApp));
     navigation.goBack();
   };
 
@@ -200,17 +203,16 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
               />
             </>
           </Accordion>
-
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
-              <Text style={styles.primaryButtonText}>Save Application</Text>
-            </TouchableOpacity>
-          </View>
         </ScrollView>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
+            <Text style={styles.primaryButtonText}>Save Application</Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAvoidingView>
 
       {activeModal === MODALS.APPLIED && (
-        <AppCalendarModal
+        <CalendarModal
           getSelectedDate={getAppliedOnDate}
           onClose={onCloseCalendar}
           selectedDate={applicationForm.appliedOnDate}
@@ -218,7 +220,7 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
       )}
 
       {activeModal === MODALS.FOLLOWUP && (
-        <AppCalendarModal
+        <CalendarModal
           getSelectedDate={getFollowUpDate}
           onClose={onCloseCalendar}
           selectedDate={applicationForm.followUpDate}

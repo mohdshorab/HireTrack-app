@@ -30,11 +30,27 @@ export const saveApplication = (app: ApplicationItem): void => {
 export const updateApplication = (updatedApp: ApplicationItem): void => {
   try {
     const currentApps = getApplications();
-    const newApps = currentApps.map(app =>
-      app.id === updatedApp.id ? updatedApp : app
-    );
+    const newApps = currentApps.map(app => (app.id === updatedApp.id ? updatedApp : app));
     storage.set(APPLICATIONS_KEY, JSON.stringify(newApps));
   } catch (error) {
     console.error('Failed to update application in storage:', error);
+  }
+};
+
+export const deleteAllApplications = () => {
+  try {
+    storage.remove(APPLICATIONS_KEY);
+  } catch (error) {
+    console.error('Failed to delete applications in storage:', error);
+  }
+};
+
+export const getApplicationById = (id: string) => {
+  try {
+    const applications = getApplications();
+    const application = applications.find(app => app.id === id);
+    return application;
+  } catch (error) {
+    console.error('Failed to fetch application from storage:', error);
   }
 };
