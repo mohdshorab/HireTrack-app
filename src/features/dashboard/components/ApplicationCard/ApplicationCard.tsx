@@ -3,9 +3,13 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Colors } from '../../../../themes';
 import { ApplicationItem } from '../../../../types/application';
 import { styles } from './ApplicationCard.styles';
+import { NavigationProp } from '@react-navigation/native';
+import RootStackParamList from '../../../../navigation/RootStackParamList';
+import { StatusBadge } from '../../../../components';
 
 type ApplicationCardProps = {
   item: ApplicationItem;
+  navigation: NavigationProp<RootStackParamList>;
 };
 
 const getStatusStyle = (status: string) => {
@@ -18,21 +22,24 @@ const getStatusStyle = (status: string) => {
     : { color: Colors.textSecondary, backgroundColor: Colors.border, borderColor: Colors.border };
 };
 
-const ApplicationCard: React.FC<ApplicationCardProps> = ({ item }) => {
-  const currentRoundName = item.rounds && item.rounds.length > 0
-    ? item.rounds[item.rounds.length - 1].name
-    : 'Applied';
+const ApplicationCard: React.FC<ApplicationCardProps> = ({ item, navigation }) => {
+  const currentRoundName =
+    item.rounds && item.rounds.length > 0 ? item.rounds[item.rounds.length - 1].name : 'Applied';
+
+  const onPressCard = () => {
+    if (navigation) {
+      navigation.navigate('applicationDetails', { applicationId: item.id });
+    }
+  };
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity onPress={onPressCard} style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerTextContainer}>
           <Text style={styles.companyName}>{item.companyName}</Text>
           <Text style={styles.position}>{item.role}</Text>
         </View>
-        <Text style={[styles.statusBadge, getStatusStyle(item.status)]}>
-          {item.status}
-        </Text>
+        <StatusBadge status={item?.status} />
       </View>
       <View style={styles.divider} />
       <View style={styles.footer}>

@@ -1,27 +1,17 @@
-import { useState, useCallback } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Text, View, ScrollView } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 import RootStackParamList from '../../../../navigation/RootStackParamList';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Header, StatusBadges, IonicIcon } from '../../../../components';
-import StateLabel from '../../components/StateLabel/StateLabel';
+import { Header, IonicIcon } from '../../../../components';
+import ApplicationStats from '../../components/ApplicationStats/ApplicationStats';
 import ApplicationCard from '../../components/ApplicationCard/ApplicationCard';
-import { getApplications } from '../../../../services/storage';
-import { ApplicationItem } from '../../../../types/application';
 import { styles } from './DashboardScreen.styles';
+import { useAppSelector } from '../../../../store';
 
 type props = NativeStackScreenProps<RootStackParamList, 'dashboard'>;
 
 const DashboardScreen: React.FC<props> = ({ navigation }) => {
-  const [applications, setApplications] = useState<ApplicationItem[]>([]);
-
-  useFocusEffect(
-    useCallback(() => {
-      const data = getApplications();
-      setApplications(data);
-    }, []),
-  );
+  const applications = useAppSelector(state => state.Application.applications);
 
   const appliedCount = applications.filter(a => a.status === 'Applied').length;
   const activeCount = applications.filter(a =>
@@ -39,16 +29,15 @@ const DashboardScreen: React.FC<props> = ({ navigation }) => {
     <SafeAreaView style={styles.parent}>
       <Header title="Dashboard" showTimestamp navigation={navigation} />
       <View style={styles.statsContainer}>
-        <StateLabel items={statusData} />
+        <ApplicationStats items={statusData} />
       </View>
       <Text style={styles.sectionTitle}>Recent Applications</Text>
       <ScrollView style={styles.applicationsContainer}>
         {applications.map(item => (
-          <ApplicationCard key={item.id} item={item} />
+          <ApplicationCard key={item.id} item={item} navigation={navigation} />
         ))}
         {applications.length === 0 && <Text style={styles.emptyText}>No applications yet.</Text>}
       </ScrollView>
-      <StatusBadges />
       <View>
         <IonicIcon
           iconName="add-outline"
