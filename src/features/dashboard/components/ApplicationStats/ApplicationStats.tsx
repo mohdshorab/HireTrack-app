@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Colors } from '../../../../themes';
-import { styles } from './StateLabel.styles';
+import { styles } from './ApplicationStats.styles';
 
 type Item = {
   id: number;
@@ -9,11 +9,11 @@ type Item = {
   count: number;
 };
 
-type StateLabelProps = {
+type ApplicationStatsProps = {
   items: Item[];
 };
 
-const StateLabel: React.FC<StateLabelProps> = ({ items }) => {
+const ApplicationStats: React.FC<ApplicationStatsProps> = ({ items }) => {
   const getStatusStyle = (status: string) => {
     switch (status) {
       case 'applied':
@@ -39,4 +39,4 @@ const StateLabel: React.FC<StateLabelProps> = ({ items }) => {
   );
 };
 
-export default StateLabel;
+export default ApplicationStats;

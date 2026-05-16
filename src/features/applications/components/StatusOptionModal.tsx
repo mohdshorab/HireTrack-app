@@ -3,14 +3,14 @@ import { Modal, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { Colors, Spacing, Radius } from '../../../themes';
 import { hs, vs, ms } from '../../../utils/responsive';
 
-type StatusOptionModal = {
+type StatusOptionModalProps = {
   showModal: boolean;
   onClose: () => void;
   onPressOption: (option: string) => void;
 };
 const STATUS_OPTIONS = ['Applied', 'Interview', 'Rejected', 'Offer', 'Shortlisted'];
 
-const StatusOptionModal: React.FC<StatusOptionModal> = ({ showModal, onClose, onPressOption }) => {
+const StatusOptionModal: React.FC<StatusOptionModalProps> = ({ showModal, onClose, onPressOption }) => {
   return (
     <Modal visible={showModal} transparent animationType="fade" onRequestClose={onClose}>
       <TouchableOpacity style={styles.modalOverlay} activeOpacity={1} onPress={onClose}>

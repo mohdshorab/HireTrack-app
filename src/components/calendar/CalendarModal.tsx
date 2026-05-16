@@ -19,7 +19,7 @@ type CalendarProps = {
   selectedDate: string;
 };
 
-const AppCalendarModal: React.FC<CalendarProps> = ({
+const CalendarModal: React.FC<CalendarProps> = ({
   getSelectedDate,
   onClose,
   selectedDate,
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppCalendarModal;
+export default CalendarModal;
