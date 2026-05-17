@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { Colors } from '../../themes';
 import IonicIcon from '../ionicIcon/IonicIcon';
-import { ms } from '../../utils/responsive';
+import { ms } from 'react-native-size-matters';
 import { useState } from 'react';
 import { styles } from './Accordion.styles';
 

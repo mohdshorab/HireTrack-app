@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, StyleProp, ViewStyle, View } from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { Colors } from '../../themes';
-import { hs } from '../../utils/responsive';
+import { s } from 'react-native-size-matters';
 
 type IconProps = {
   iconName: string;
@@ -23,11 +23,11 @@ const IonicIcon: React.FC<IconProps> = ({
     <>
       {onPress ? (
         <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={style}>
-          <Ionicons name={iconName} color={color} size={hs(size)} />
+          <Ionicons name={iconName as any} color={color} size={s(size)} />
         </TouchableOpacity>
       ) : (
         <View style={style}>
-          <Ionicons name={iconName} color={color} size={hs(size)} />
+          <Ionicons name={iconName as any} color={color} size={s(size)} />
         </View>
       )}
     </>

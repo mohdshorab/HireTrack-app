@@ -3,7 +3,7 @@ import { Modal, Pressable, View, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { getCurrentDate } from '../../utils/dateHelpers';
 import { Colors, Radius, Spacing } from '../../themes';
-import { ms, vs, hs } from '../../utils/responsive';
+import { s, vs, ms } from 'react-native-size-matters';
 
 type CalendarResponseType = {
   year: number;
@@ -17,6 +17,7 @@ type CalendarProps = {
   getSelectedDate: (date: string) => void;
   onClose: () => void;
   selectedDate: string;
+  minDate?: string;
 };
 
 const CalendarModal: React.FC<CalendarProps> = ({
@@ -62,12 +63,12 @@ const CalendarModal: React.FC<CalendarProps> = ({
               markedDates={
                 selectedDate
                   ? {
-                      [selectedDate]: {
-                        selected: true,
-                        selectedColor: Colors.primary,
-                        selectedTextColor: Colors.textPrimary,
-                      },
-                    }
+                    [selectedDate]: {
+                      selected: true,
+                      selectedColor: Colors.primary,
+                      selectedTextColor: Colors.textPrimary,
+                    },
+                  }
                   : {}
               }
               {...props}

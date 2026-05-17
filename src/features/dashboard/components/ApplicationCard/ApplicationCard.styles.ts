@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
 import { Colors, Spacing, Radius } from '../../../../themes';
-import { hs, vs, ms } from '../../../../utils/responsive';
+import { s, vs, ms } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
   container: {
     borderRadius: ms(Radius.card),
     backgroundColor: Colors.surface,
-    paddingHorizontal: hs(16),
+    paddingHorizontal: s(16),
     paddingVertical: vs(12),
     borderWidth: 1,
     borderColor: Colors.border,
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   },
   headerTextContainer: {
     flex: 1,
-    paddingRight: hs(Spacing.md),
+    paddingRight: s(Spacing.md),
   },
   companyName: {
     color: Colors.textPrimary,
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: ms(Radius.sm),
     paddingVertical: vs(4),
-    paddingHorizontal: hs(Spacing.md),
+    paddingHorizontal: s(Spacing.md),
     alignSelf: 'center',
     fontSize: ms(14),
     fontWeight: '700',
@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
     color: Colors.textDisabled,
     backgroundColor: Colors.disabled,
     paddingVertical: vs(4),
-    paddingHorizontal: hs(Spacing.md),
+    paddingHorizontal: s(Spacing.md),
     alignSelf: 'center',
     fontSize: ms(12),
     fontWeight: '500',

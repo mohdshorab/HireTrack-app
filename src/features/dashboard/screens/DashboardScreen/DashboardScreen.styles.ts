@@ -1,18 +1,18 @@
 import { StyleSheet } from 'react-native';
 import { Colors, Spacing, Radius } from '../../../../themes';
-import { hs, vs, ms } from '../../../../utils/responsive';
+import { s, vs, ms } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
   parent: {
     flex: 1,
     backgroundColor: Colors.background,
-    paddingHorizontal: hs(Spacing.screenPadH),
+    paddingHorizontal: s(Spacing.screenPadH),
   },
   statsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginVertical: vs(Spacing.md),
-    gap: hs(Spacing.sm),
+    gap: s(Spacing.sm),
   },
   sectionTitle: {
     color: Colors.textSecondary,
@@ -28,17 +28,17 @@ export const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     bottom: vs(Spacing.xl),
-    right: hs(Spacing.xl),
+    right: s(Spacing.xl),
     backgroundColor: Colors.primary,
-    width: hs(60),
-    height: hs(60),
-    borderRadius: hs(30),
+    width: s(60),
+    height: s(60),
+    borderRadius: s(30),
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: Colors.primary,
     shadowOffset: { width: 0, height: vs(4) },
     shadowOpacity: 0.3,
-    shadowRadius: hs(8),
+    shadowRadius: s(8),
     elevation: 5,
     zIndex: 10,
   },

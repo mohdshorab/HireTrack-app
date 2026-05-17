@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { Colors } from '../../themes';
-import { hs, ms, vs } from '../../utils/responsive';
+import { s, ms, vs } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: hs(10),
+    paddingHorizontal: s(10),
   },
   header: {
     flexDirection: 'row',

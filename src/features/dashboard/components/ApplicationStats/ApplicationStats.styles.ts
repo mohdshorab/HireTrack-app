@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Colors, Spacing, Radius } from '../../../../themes';
-import { hs, vs, ms } from '../../../../utils/responsive';
+import { s, vs, ms } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,10 +10,10 @@ export const styles = StyleSheet.create({
   },
   badge: {
     aspectRatio: 1.77,
-    paddingHorizontal: hs(Spacing.md),
+    paddingHorizontal: s(Spacing.md),
     justifyContent: 'center',
     borderRadius: ms(Radius.xs),
-    margin: hs(Spacing.xs),
+    margin: s(Spacing.xs),
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Colors.surface,

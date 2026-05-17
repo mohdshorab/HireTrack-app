@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
 import { Colors, Spacing, Radius } from '../../../../themes';
-import { hs, vs, ms } from '../../../../utils/responsive';
+import { s, vs, ms } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
   parent: {
     flex: 1,
     backgroundColor: Colors.background,
-    paddingHorizontal: hs(Spacing.screenPadH),
+    paddingHorizontal: s(Spacing.screenPadH),
   },
   scrollContent: {
     flexGrow: 1,
@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
-    paddingHorizontal: hs(Spacing.xl),
+    paddingHorizontal: s(Spacing.xl),
   },
   modalContent: {
     backgroundColor: Colors.surface,
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
   },
   modalOption: {
     paddingVertical: vs(Spacing.md),
-    paddingHorizontal: hs(Spacing.lg),
+    paddingHorizontal: s(Spacing.lg),
     borderBottomWidth: 0.5,
     borderBottomColor: Colors.border,
   },

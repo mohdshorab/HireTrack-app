@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Colors, Spacing } from '../../themes';
-import { hs, vs, ms } from '../../utils/responsive';
+import { s, vs, ms } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,9 +9,9 @@ export const styles = StyleSheet.create({
     gap: vs(Spacing.md),
   },
   backButton: {
-    marginRight: hs(Spacing.xl),
+    marginRight: s(Spacing.xl),
     flexDirection: 'row',
-    gap: hs(Spacing.xs),
+    gap: s(Spacing.xs),
     alignSelf: 'flex-start',
   },
   titleText: {

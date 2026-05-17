@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Colors, Radius, Spacing } from '../../../../themes';
-import { ms } from '../../../../utils/responsive';
+import { ms } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
   overlay: {

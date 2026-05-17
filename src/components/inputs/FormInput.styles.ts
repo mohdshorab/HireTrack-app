@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Colors, Spacing, Radius } from '../../themes';
-import { hs, vs, ms } from '../../utils/responsive';
+import { s, vs, ms } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
   wrapper: {
@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.border,
     borderRadius: ms(Radius.sm),
-    paddingHorizontal: hs(Spacing.md),
+    paddingHorizontal: s(Spacing.md),
     paddingVertical: vs(10),
   },
   containerError: {
@@ -44,12 +44,12 @@ export const styles = StyleSheet.create({
     padding: 0,
   },
   iconContainer: {
-    marginLeft: hs(Spacing.sm),
+    marginLeft: s(Spacing.sm),
   },
   errorText: {
     color: Colors.danger,
     fontSize: ms(12),
     marginTop: vs(4),
-    marginLeft: hs(4),
+    marginLeft: s(4),
   },
 });

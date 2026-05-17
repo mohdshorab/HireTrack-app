@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors, Radius, Spacing } from '../../themes';
-import { hs, ms, vs } from '../../utils/responsive';
+import { s, ms, vs } from 'react-native-size-matters';
 
 type StatusBadgeProps = {
   status?: string;
+  onPress?: () => void;
 };
 
 const getStatusStyle = (status?: string) => {
@@ -16,11 +17,18 @@ const getStatusStyle = (status?: string) => {
     : { color: Colors.textSecondary, backgroundColor: Colors.border, borderColor: Colors.border };
 };
 
-const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
+const StatusBadge: React.FC<StatusBadgeProps> = ({ status, onPress }) => {
   if (!status) return null;
-
   return (
-    <Text style={[styles.statusBadge, getStatusStyle(status)]}>{status}</Text>
+    <>
+      {onPress ? (
+        <TouchableOpacity onPress={onPress}>
+          <Text style={[styles.statusBadge, getStatusStyle(status)]}>{status}</Text>
+        </TouchableOpacity>
+      ) : (
+        <Text style={[styles.statusBadge, getStatusStyle(status)]}>{status}</Text>
+      )}
+    </>
   );
 };
 
@@ -29,7 +37,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: ms(Radius.sm),
     paddingVertical: vs(4),
-    paddingHorizontal: hs(Spacing.md),
+    paddingHorizontal: s(Spacing.md),
     alignSelf: 'center',
     fontSize: ms(14),
     fontWeight: '700',

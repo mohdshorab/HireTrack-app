@@ -34,10 +34,10 @@ HireTrack offers a blazing-fast user experience with a fully responsive UI that 
 ## 🏗️ Architecture
 
 ### Responsive Scaling Utility
-Located in `src/utils/responsive.ts`, this utility provides static scaling functions based on a 390x844 design baseline:
-- `hs` (Horizontal Scale): For widths and horizontal spacing.
-- `vs` (Vertical Scale): For heights and vertical spacing.
-- `ms` (Moderate Scale): For font sizes and border radii.
+We use the production-grade [react-native-size-matters](https://github.com/nirsky/react-native-size-matters) library to ensure pixel-perfect responsive layouts on every device size. Standard exports are used:
+- `s` (Scale): Linear scale based on screen width (used for widths, margins, padding, and horizontal spacing).
+- `vs` (Vertical Scale): Linear scale based on screen height (used for heights and vertical spacing).
+- `ms` (Moderate Scale): Moderate scale (used for font sizes, border radii, etc.).
 
 ### Style Separation
 Styles are separated into `.styles.ts` files and consumed as static objects, keeping components lean and performant.
@@ -56,7 +56,7 @@ Before proceeding, ensure you have followed the [official React Native environme
    ```
 2. **Install dependencies**:
    ```bash
-   npm install
+   yarn install # or npm install
    ```
 3. **Install CocoaPods** (iOS Only):
    ```bash
@@ -67,17 +67,17 @@ Before proceeding, ensure you have followed the [official React Native environme
 
 1. **Start Metro Bundler**:
    ```bash
-   npm start
+   yarn start # or npm start
    ```
 
 2. **Run on Android**:
    ```bash
-   npm run android
+   yarn android # or npm run android
    ```
 
 3. **Run on iOS**:
    ```bash
-   npm run ios
+   yarn ios # or npm run ios
    ```
 
 ---
@@ -94,7 +94,7 @@ src/
 ├── services/           # Data persistence and services
 ├── themes/             # Color palettes and global spacing
 ├── types/              # TypeScript interfaces
-└── utils/              # Global helper functions (Responsive scaling)
+└── utils/              # Global helper functions
 ```
 
 ---

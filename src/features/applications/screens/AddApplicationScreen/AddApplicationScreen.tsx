@@ -14,7 +14,7 @@ import { FormInput, Header, CalendarModal, IonicIcon, Accordion } from '../../..
 import { ApplicationItem } from '../../../../types/application';
 import { styles } from './AddApplicationScreen.styles';
 import StatusOptionModal from '../../components/StatusOptionModal';
-import { ms } from '../../../../utils/responsive';
+import { ms } from 'react-native-size-matters';
 import { getCurrentDate } from '../../../../utils/dateHelpers';
 import InfoModal from '../../components/infoModal/InfoModal';
 import { nanoid } from '@reduxjs/toolkit';
