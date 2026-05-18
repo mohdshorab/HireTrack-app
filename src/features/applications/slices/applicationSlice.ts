@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ApplicationItem } from '../../../types/application';
-import { getApplications, saveApplication } from '../../../services/storage';
+import { getApplications, saveApplication, updateApplication } from '../../../services/storage';
 
 type InitialStateType = {
   applications: ApplicationItem[];
@@ -21,8 +21,12 @@ const ApplicationSlice = createSlice({
     setApplications(state) {
       state.applications = getApplications();
     },
+    patchApplication(state, action: { payload: ApplicationItem }) {
+      updateApplication(action.payload);
+      state.applications = getApplications();
+    },
   },
 });
 
-export const { addApplication, setApplications } = ApplicationSlice.actions;
+export const { addApplication, setApplications, patchApplication } = ApplicationSlice.actions;
 export default ApplicationSlice.reducer;
