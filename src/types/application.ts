@@ -1,8 +1,9 @@
 export interface InterviewRound {
   id: string;
-  name: string;
   date?: string;
-  status: 'Done' | 'Pending' | 'Not scheduled yet';
+  status: 'done' | 'pending' | 'null';
+  label: 'applied' | 'screening' | 'round' | 'HR';
+  result: 'cleared' | 'rejected' | null;
 }
 
 export interface ApplicationItem {
@@ -12,11 +13,11 @@ export interface ApplicationItem {
   location: string;
   salary: string | null;
   jdLink?: string | null;
-  status: string;
+  status: 'applied' | 'interview' | 'shortlisted' | 'offer' | 'rejected';
   appliedOn: string | null;
   followUpDate?: string | null;
   notes?: string | null;
-  rounds: InterviewRound[];
+  pipeline?: InterviewRound[];
   createdAt: number;
   updatedAt: number;
 }

@@ -18,6 +18,8 @@ export const Colors = {
   textSecondary: '#8F8F9E',
   textDisabled: '#6E6E82',
 
+  fill: { success: '#0f2820', pending: '#1e1a44', null: '#1c1c26' },
+
   // Status Badge
   badge: {
     applied: {
