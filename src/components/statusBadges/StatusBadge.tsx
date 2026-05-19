@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     paddingVertical: vs(4),
     paddingHorizontal: s(Spacing.md),
     alignSelf: 'center',
+    textAlign:'center',
     fontSize: ms(14),
     fontWeight: '700',
     overflow: 'hidden',

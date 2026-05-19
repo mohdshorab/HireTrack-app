@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Colors, Radius } from '../../themes';
+import { Colors, Radius, Spacing } from '../../themes';
 import { s, vs, ms } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
@@ -10,6 +10,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
+    borderWidth: 1.5,
+    borderColor: 'transparent',
   },
   buttonDisabled: {
     backgroundColor: Colors.textDisabled,
@@ -22,5 +24,17 @@ export const styles = StyleSheet.create({
   },
   textDisabled: {
     color: Colors.textSecondary,
+  },
+  outline: {
+    backgroundColor: 'transparent',
+    borderColor: Colors.primary,
+  },
+  outlineDisabled: {
+    backgroundColor: 'transparent',
+    borderColor: Colors.textDisabled,
+    opacity: 0.5,
+  },
+  textOutline: {
+    color: Colors.primary,
   },
 });

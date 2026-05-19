@@ -17,6 +17,7 @@ type ButtonProps = {
   textStyle?: StyleProp<TextStyle>;
   disabled?: boolean;
   loading?: boolean;
+  outline?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -26,6 +27,7 @@ const Button: React.FC<ButtonProps> = ({
   textStyle,
   disabled = false,
   loading = false,
+  outline = false,
 }) => {
   const isInteractionDisabled = disabled || loading;
 
@@ -34,16 +36,23 @@ const Button: React.FC<ButtonProps> = ({
       activeOpacity={0.8}
       style={[
         styles.button,
-        style,
+        outline && styles.outline,
         isInteractionDisabled && styles.buttonDisabled,
+        isInteractionDisabled && outline && styles.outlineDisabled,
+        style,
       ]}
       onPress={onPress}
-      disabled={isInteractionDisabled}
-    >
+      disabled={isInteractionDisabled}>
       {loading ? (
-        <ActivityIndicator size="small" color={Colors.textPrimary} />
+        <ActivityIndicator size="small" color={outline ? Colors.primary : Colors.textPrimary} />
       ) : (
-        <Text style={[styles.text, textStyle, disabled && styles.textDisabled]}>
+        <Text
+          style={[
+            styles.text,
+            outline && styles.textOutline,
+            disabled && styles.textDisabled,
+            textStyle,
+          ]}>
           {title}
         </Text>
       )}

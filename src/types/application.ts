@@ -1,8 +1,10 @@
+type RoundType = 'applied' | 'screening' | 'technical' | 'system_design' | 'managerial' | 'hr';
+
 export interface InterviewRound {
   id: string;
   date?: string;
   status: 'done' | 'pending' | 'null';
-  label: 'applied' | 'screening' | 'round' | 'HR';
+  label: RoundType;
   result: 'cleared' | 'rejected' | null;
 }
 
