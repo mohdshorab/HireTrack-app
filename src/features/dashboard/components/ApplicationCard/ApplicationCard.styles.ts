@@ -72,5 +72,6 @@ export const styles = StyleSheet.create({
     fontSize: ms(12),
     fontWeight: '500',
     overflow: 'hidden',
+    textTransform: 'capitalize',
   },
 });

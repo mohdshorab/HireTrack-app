@@ -24,7 +24,7 @@ const getStatusStyle = (status: string) => {
 
 const ApplicationCard: React.FC<ApplicationCardProps> = ({ item, navigation }) => {
   const currentRoundName =
-    item.rounds && item.rounds.length > 0 ? item.rounds[item.rounds.length - 1].name : 'Applied';
+    item.pipeline && item.pipeline.length > 0 ? item.pipeline[item.pipeline.length - 1].label : 'Applied';
 
   const onPressCard = () => {
     if (navigation) {

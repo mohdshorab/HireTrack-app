@@ -47,5 +47,32 @@ export const styles = StyleSheet.create({
     fontStyle: 'italic',
     paddingVertical: vs(Spacing.md),
     fontSize: ms(14),
-  }
+  },
+  fallbackContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: s(Spacing.xl),
+  },
+  fallbackIconContainer: {
+    marginBottom: vs(Spacing.lg),
+    backgroundColor: Colors.surface,
+    padding: ms(20),
+    borderRadius: ms(Radius.pill),
+    borderWidth: 1,
+    borderColor: Colors.border,
+  },
+  fallbackTitle: {
+    color: Colors.textPrimary,
+    fontSize: ms(18),
+    fontWeight: '700',
+    textAlign: 'center',
+    marginBottom: vs(Spacing.sm),
+  },
+  fallbackSubtitle: {
+    color: Colors.textSecondary,
+    fontSize: ms(14),
+    textAlign: 'center',
+    lineHeight: ms(20),
+  },
 });
