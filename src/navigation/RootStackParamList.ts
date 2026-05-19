@@ -1,7 +1,9 @@
 type RootStackParamList = {
   loginscreen: undefined;
   dashboard: undefined;
-  addApplication: undefined;
+  manageApplication: {
+    id?: string;
+  } | undefined;
   applicationDetails: {
     applicationId: string;
   };

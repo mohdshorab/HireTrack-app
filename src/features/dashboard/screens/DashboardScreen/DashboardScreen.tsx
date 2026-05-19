@@ -54,7 +54,7 @@ const DashboardScreen: React.FC<props> = ({ navigation }) => {
         <IonicIcon
           iconName="add-outline"
           size={28}
-          onPress={() => navigation.navigate('addApplication')}
+          onPress={() => navigation.navigate('manageApplication')}
           style={styles.fab}
         />
       </View>

@@ -10,34 +10,53 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import RootStackParamList from '../../../../navigation/RootStackParamList';
-import { FormInput, Header, CalendarModal, IonicIcon, Accordion } from '../../../../components';
-import { ApplicationItem } from '../../../../types/application';
-import { styles } from './AddApplicationScreen.styles';
+import {
+  FormInput,
+  Header,
+  CalendarModal,
+  IonicIcon,
+  Accordion,
+  Button,
+} from '../../../../components';
+import { ApplicationItem, InterviewRound } from '../../../../types/application';
+import { styles } from './ManageApplicationScreen.styles';
 import StatusOptionModal from '../../components/StatusOptionModal';
 import { ms } from 'react-native-size-matters';
 import { getCurrentDate } from '../../../../utils/dateHelpers';
 import InfoModal from '../../components/infoModal/InfoModal';
 import { nanoid } from '@reduxjs/toolkit';
-import { useAppDispatch } from '../../../../store';
-import { addApplication } from '../../slices/applicationSlice';
+import { useAppDispatch, useAppSelector } from '../../../../store';
+import { addApplication, patchApplication } from '../../slices/applicationSlice';
+import { getApplicationById } from '../../slices/applicationSelectors';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'addApplication'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'manageApplication'>;
 const MODALS = {
   APPLIED: 'APPLIED',
   FOLLOWUP: 'FOLLOWUP',
   NONE: null,
 };
-const AddApplicationScreen: FC<Props> = ({ navigation }) => {
-  const [applicationForm, setApplicationForm] = useState<Record<string, string>>({
-    companyName: '',
-    role: '',
-    location: '',
-    salary: '',
-    jdLink: '',
-    status: '',
-    appliedOnDate: '',
-    followUpDate: '',
-  });
+const defaultStepInPiepline: InterviewRound = {
+  id: '1',
+  status: 'done',
+  label: 'applied',
+  result: 'cleared',
+};
+
+const ManageApplicationScreen: FC<Props> = ({ navigation, route }) => {
+  const id = route.params?.id;
+  const application = useAppSelector(state => getApplicationById(state, id));
+  const [applicationForm, setApplicationForm] = useState<ApplicationItem | Record<string, string>>(
+    application ?? {
+      companyName: '',
+      role: '',
+      location: '',
+      salary: '',
+      jdLink: '',
+      status: '',
+      appliedOn: '',
+      followUpDate: '',
+    },
+  );
 
   const [showModal, setShowModal] = useState(false);
   const [activeModal, setActiveModal] = useState<string | null>(MODALS.NONE);
@@ -50,9 +69,9 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
   const handleSave = () => {
     const newErrors: Record<string, string> = {};
 
-    if (!applicationForm.companyName.trim()) newErrors.companyName = "Company Name can't be empty";
-    if (!applicationForm.role.trim()) newErrors.role = "Role can't be empty";
-    if (!applicationForm.location.trim()) newErrors.location = "Location can't be empty";
+    if (!applicationForm.companyName?.trim()) newErrors.companyName = "Company Name can't be empty";
+    if (!applicationForm.role?.trim()) newErrors.role = "Role can't be empty";
+    if (!applicationForm.location?.trim()) newErrors.location = "Location can't be empty";
     if (!applicationForm.status) newErrors.status = "Status can't be empty";
 
     if (Object.keys(newErrors).length > 0) {
@@ -63,22 +82,31 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
     setErrors({});
 
     const newApp: ApplicationItem = {
-      id: nanoid(),
-      companyName: applicationForm.companyName.trim(),
-      role: applicationForm.role.trim(),
-      location: applicationForm.location.trim(),
+      id: id || nanoid(),
+      companyName: applicationForm.companyName?.trim() || '',
+      role: applicationForm.role?.trim() || '',
+      location: applicationForm.location?.trim() || '',
       salary: applicationForm.salary?.trim() || null,
       jdLink: applicationForm.jdLink?.trim() || null,
-      status: applicationForm.status,
-      appliedOn: applicationForm.appliedOnDate ?? new Date().toISOString(),
+      status: applicationForm.status?.toLowerCase() as ApplicationItem['status'],
+      appliedOn: applicationForm.appliedOn ?? new Date().toISOString(),
       followUpDate: applicationForm.followUpDate ?? null,
       notes: applicationForm.notes?.trim() || null,
-      rounds: [],
-      createdAt: Date.now(),
+      pipeline: application?.pipeline || [{ ...defaultStepInPiepline }],
+      createdAt: application?.createdAt || Date.now(),
       updatedAt: Date.now(),
     };
 
-    dispatch(addApplication(newApp));
+    if (Object.keys(application).values === Object.keys(newApp).values) {
+      navigation.goBack();
+      return;
+    }
+
+    if (id) {
+      dispatch(patchApplication(newApp));
+    } else {
+      dispatch(addApplication(newApp));
+    }
     navigation.goBack();
   };
 
@@ -89,7 +117,7 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
 
   const onClose = () => setShowModal(false);
 
-  const getAppliedOnDate = (date: string) => handleApplicationForm('appliedOnDate', date);
+  const getAppliedOnDate = (date: string) => handleApplicationForm('appliedOn', date);
   const getFollowUpDate = (date: string) => handleApplicationForm('followUpDate', date);
   const onCloseCalendar = () => setActiveModal(MODALS.NONE);
 
@@ -101,7 +129,11 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.parent}>
-      <Header title="Add Application" canGoBack navigation={navigation} />
+      <Header
+        title={id ? 'Edit Application' : 'Add Application'}
+        canGoBack
+        navigation={navigation}
+      />
 
       <KeyboardAvoidingView
         style={styles.keyboardAvoidingView}
@@ -111,7 +143,7 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
           showsVerticalScrollIndicator={false}>
           <FormInput
             label="Company Name"
-            value={applicationForm.companyName}
+            value={applicationForm.companyName || ''}
             onChangeText={text => {
               handleApplicationForm('companyName', text);
               if (errors.companyName) setErrors({ ...errors, companyName: '' });
@@ -123,7 +155,7 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
 
           <FormInput
             label="Role"
-            value={applicationForm.role}
+            value={applicationForm.role || ''}
             onChangeText={text => {
               handleApplicationForm('role', text);
               if (errors.role) setErrors({ ...errors, role: '' });
@@ -135,7 +167,7 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
 
           <FormInput
             label="Location"
-            value={applicationForm.location}
+            value={applicationForm.location || ''}
             onChangeText={text => {
               handleApplicationForm('location', text);
               if (errors.location) setErrors({ ...errors, location: '' });
@@ -147,7 +179,7 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
 
           <FormInput
             label="Status"
-            value={applicationForm.status}
+            value={applicationForm.status || ''}
             placeholder="Select Status"
             onPress={() => {
               setShowModal(true);
@@ -162,19 +194,20 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
             title="Add more details">
             <>
               <FormInput
-                label="Salary"
-                value={applicationForm.salary}
+                label="Salary (in LPA)"
+                value={applicationForm.salary || ''}
                 onChangeText={text => {
                   handleApplicationForm('salary', text);
                   if (errors.salary) setErrors({ ...errors, salary: '' });
                 }}
-                placeholder="e.g. ₹14 LPA"
+                placeholder="e.g. 12"
                 errorMessage={errors.salary}
+                keyboardType="numeric"
               />
 
               <FormInput
                 label="JD Link"
-                value={applicationForm.jdLink}
+                value={applicationForm.jdLink || ''}
                 onChangeText={text => {
                   handleApplicationForm('jdLink', text);
                 }}
@@ -183,7 +216,7 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
 
               <FormInput
                 label="Applied On"
-                value={applicationForm.appliedOnDate}
+                value={applicationForm.appliedOn || ''}
                 placeholder="Select date"
                 onPress={() => setActiveModal(MODALS.APPLIED)}
               />
@@ -197,7 +230,7 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
                     size={ms(14)}
                   />
                 }
-                value={applicationForm.followUpDate}
+                value={applicationForm.followUpDate || ''}
                 placeholder="Select date"
                 onPress={() => setActiveModal(MODALS.FOLLOWUP)}
               />
@@ -205,9 +238,7 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
           </Accordion>
         </ScrollView>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.primaryButton} onPress={handleSave}>
-            <Text style={styles.primaryButtonText}>Save Application</Text>
-          </TouchableOpacity>
+          <Button title="Save Application" onPress={handleSave} />
         </View>
       </KeyboardAvoidingView>
 
@@ -215,7 +246,7 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
         <CalendarModal
           getSelectedDate={getAppliedOnDate}
           onClose={onCloseCalendar}
-          selectedDate={applicationForm.appliedOnDate}
+          selectedDate={applicationForm.appliedOn || ''}
         />
       )}
 
@@ -223,7 +254,7 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
         <CalendarModal
           getSelectedDate={getFollowUpDate}
           onClose={onCloseCalendar}
-          selectedDate={applicationForm.followUpDate}
+          selectedDate={applicationForm.followUpDate || ''}
           minDate={getCurrentDate()}
         />
       )}
@@ -238,4 +269,4 @@ const AddApplicationScreen: FC<Props> = ({ navigation }) => {
   );
 };
 
-export default AddApplicationScreen;
+export default ManageApplicationScreen;

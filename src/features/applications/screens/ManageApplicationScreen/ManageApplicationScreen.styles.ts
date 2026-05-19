@@ -22,18 +22,6 @@ export const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
   },
-  primaryButton: {
-    backgroundColor: Colors.primary,
-    borderRadius: ms(Radius.sm),
-    paddingVertical: vs(12),
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  primaryButtonText: {
-    color: Colors.textPrimary,
-    fontSize: ms(16),
-    fontWeight: '700',
-  },
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
