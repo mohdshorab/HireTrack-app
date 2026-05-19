@@ -24,6 +24,7 @@ HireTrack offers a blazing-fast user experience with a fully responsive UI that 
 
 - **Core**: [React Native 0.85.3](https://reactnative.dev/)
 - **Storage**: [MMKV](https://github.com/mrousavy/react-native-mmkv)
+- **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/)
 - **Native Bridges**: [Nitro Modules](https://github.com/mrousavy/react-native-nitro-modules)
 - **Navigation**: [React Navigation 7](https://reactnavigation.org/)
 - **Icons**: [@react-native-vector-icons/ionicons](https://github.com/react-native-vector-icons/react-native-vector-icons)
@@ -86,12 +87,18 @@ Before proceeding, ensure you have followed the [official React Native environme
 
 ```
 src/
+├── api/                # API endpoints and network requests
+├── assets/             # Images, fonts, and other static files
 ├── components/         # Common UI components
+├── constants/          # App-wide constant values
 ├── features/           # Feature-specific screens and logic
-│   ├── dashboard/      # Home dashboard & statistics
-│   └── applications/   # Application forms & lists
+│   ├── applications/   # Application forms & lists
+│   ├── auth/           # Authentication flow
+│   └── dashboard/      # Home dashboard & statistics
+├── hooks/              # Custom React hooks
 ├── navigation/         # Routing and stack definitions
 ├── services/           # Data persistence and services
+├── store/              # Redux store setup and slices
 ├── themes/             # Color palettes and global spacing
 ├── types/              # TypeScript interfaces
 └── utils/              # Global helper functions
